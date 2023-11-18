@@ -1,6 +1,7 @@
 package main
 
 import (
+	"crud-backend/middleware"
 	"fmt"
 
 	"github.com/gin-gonic/gin"
@@ -17,6 +18,7 @@ var db *gorm.DB
 var err error
 
 func main() {
+
 	//connect to MySQL database
 	dsn := "tetsuro:11quin17@tcp(localhost:3306)/todo?charset=utf8&parseTime=True&loc=Local"
 	db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
@@ -30,6 +32,9 @@ func main() {
 
 	//Initialize GIN router
 	router := gin.Default()
+
+	//cors
+	router.Use(middleware.Cors())
 
 	//Define routes
 	router.GET("/todos", getTodos)
