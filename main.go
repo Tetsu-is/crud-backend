@@ -20,7 +20,7 @@ var err error
 func main() {
 
 	//connect to MySQL database
-	dsn := "tetsuro:11quin17@tcp(localhost:3306)/todo?charset=utf8&parseTime=True&loc=Local"
+	dsn := "crud:pARlURjyh8PNe7K8@tcp(localhost:3306)/todo?charset=utf8&parseTime=True&loc=Local"
 	db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
 		fmt.Println("Failed to connect to MySQL database")
