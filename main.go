@@ -2,10 +2,8 @@ package main
 
 import (
 	"crud-backend/middleware"
-	"fmt"
 
 	"github.com/gin-gonic/gin"
-	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
 
@@ -27,16 +25,16 @@ func main() {
 	// 	return
 	// }
 
-	var err error
-	dsn := "host=dpg-clcpb9bmot1c73di45t0-a user=crud_6hq6_user password=u2AXJwBWKyv4hiHVryZjWkPF682L96sS dbname=crud_6hq6 port=5432 sslmode=disable TimeZone=Asia/Shanghai"
-	db, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	// var err error
+	// dsn := "host=dpg-clcpb9bmot1c73di45t0-a user=crud_6hq6_user password=u2AXJwBWKyv4hiHVryZjWkPF682L96sS dbname=crud_6hq6 port=5432 sslmode=disable TimeZone=Asia/Shanghai"
+	// db, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
 
-	if err != nil {
-		fmt.Println("Failed to connect DB")
-	}
+	// if err != nil {
+	// 	fmt.Println("Failed to connect DB")
+	// }
 
-	//Automigrate the Todo model
-	db.AutoMigrate(&Todo{})
+	// //Automigrate the Todo model
+	// db.AutoMigrate(&Todo{})
 
 	//Initialize GIN router
 	router := gin.Default()
@@ -47,6 +45,7 @@ func main() {
 	//Define routes
 	router.GET("/todos", getTodos)
 	router.POST("/todos", addTodo)
+	router.GET("/hello", hello)
 
 	//Start the server
 	router.Run("localhost:9090")
@@ -65,4 +64,10 @@ func addTodo(c *gin.Context) {
 	c.BindJSON(&todo)
 	db.Create(&todo)
 	c.JSON(200, todo)
+}
+
+func hello(c *gin.Context) {
+	c.JSON(200, gin.H{
+		"message": "hello world",
+	})
 }
