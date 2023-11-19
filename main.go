@@ -48,7 +48,7 @@ func main() {
 	router.GET("/hello", hello)
 
 	//Start the server
-	router.Run("localhost:9090")
+	router.Run()
 }
 
 // Handler function to get all Todos
