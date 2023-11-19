@@ -5,7 +5,7 @@ import (
 	"fmt"
 
 	"github.com/gin-gonic/gin"
-	"gorm.io/driver/mysql"
+	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
 
@@ -19,12 +19,20 @@ var err error
 
 func main() {
 
-	//connect to MySQL database
-	dsn := "crud:pARlURjyh8PNe7K8@tcp(localhost:3306)/todo?charset=utf8&parseTime=True&loc=Local"
-	db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
+	// connect to MySQL database
+	// dsn := "crud:pARlURjyh8PNe7K8@tcp(localhost:3306)/todo?charset=utf8&parseTime=True&loc=Local"
+	// db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
+	// if err != nil {
+	// 	fmt.Println("Failed to connect to MySQL database")
+	// 	return
+	// }
+
+	var err error
+	dsn := "host=localhost user=tetsuro password=12345 dbname=crud port=5432 sslmode=disable"
+	db, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
+
 	if err != nil {
-		fmt.Println("Failed to connect to MySQL database")
-		return
+		fmt.Println("Failed to connect DB")
 	}
 
 	//Automigrate the Todo model
