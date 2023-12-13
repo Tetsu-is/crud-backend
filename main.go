@@ -3,6 +3,8 @@ package main
 import (
 	"crud-backend/middleware"
 
+	"fmt"
+
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
 )
