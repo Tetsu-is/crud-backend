@@ -48,6 +48,13 @@ func main() {
 func getTodos(c *gin.Context) {
 	var todos []Todo
 	db.Find(&todos)
+	//if theres no todos in the database
+	if len(todos) == 0 {
+		//console log
+		fmt.Println("No todos found")
+		c.JSON(200, gin.H{"message": "No todos found"})
+		return
+	}
 	c.JSON(200, todos)
 }
 
